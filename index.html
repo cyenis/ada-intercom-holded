@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ada Integration</title>
+</head>
+
+<body>
+
+    <h1>Hello Ada bot</h1>
+
+
+
+
+    <script>
+        window.adaSettings = {
+            hideMask: true,
+            metaFields: {
+                // userid: "12233",
+                email: "costas@holded.com"
+            },
+            eventCallbacks: {
+                "custom_handoff": event => {
+
+                    console.log(event);
+
+                    Intercom('boot', {
+                        app_id: "gwbpci68",
+                        email: event.user_data.global.email,
+                        name: event.user_data.global.first_name,
+                        user_id: event.user_data.meta.userid,
+                        //user_id: event.user_data.all_data.chatter_id, //If used, will map to "user_id" in the Intercom console and to
+                        // "external_id" in the Contacts data record
+                        hide_default_launcher: true,
+                        transcript_url: "https://custom-handoff-demo.ada.support/api/chatters/" +
+                            event.user_data.all_data.chatter_token + "/transcript/txt/",
+                    });
+
+                    Intercom("show");
+                    // Intercom("showNewMessage"); // This will open the Messenger as if a new conversation was just created
+
+                    adaEmbed.toggle();
+                }
+            }
+        };
+
+    </script>
+
+
+    <script async id="__ada" src="https://static.ada.support/embed2.js" data-handle="demo-sandbox-holded-es"></script>
+    <title>Demo: Custom Handoff from Ada to Intercom</title>
+    </head>
+
+    <body style="height: 100vh;">
+        <h1>Ada Embed Testing Page!</h1>
+        <div id="parent-element" style="height: 500px;"></div>
+        <button onclick="adaEmbed.toggle()">Toggle Ada Chat</button>
+        <button onclick="adaEmbed.reset()">Reset History</button>
+        <button onclick="adaEmbed.deleteHistory()">Delete History</button>
+
+        <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/gwbpci68'; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script>
+
+        <script id="__ada" data-handle="demo-sandbox-holded-es" src="https://static.ada.support/embed2.js"></script>
+
+
+
+
+
+
+        <!-- <script>
+                window.intercomSettings = {
+                    app_id: "gwbpci68",
+                    custom_launcher_selector: ".openchat",
+                    hide_default_launcher: true,
+                };
+            </script>
+            <script>
+                (function () {
+                    var w = window;
+                    var ic = w.Intercom;
+                    if (typeof ic === "function") {
+                        ic('reattach_activator');
+                        ic('update', w.intercomSettings);
+                    } else {
+                        var d = document;
+                        var i = function () {
+                            i.c(arguments);
+                        };
+                        i.q = [];
+                        i.c = function (args) {
+                            i.q.push(args);
+                        };
+                        w.Intercom = i;
+                        var l = function () {
+                            var s = d.createElement('script');
+                            s.type = 'text/javascript';
+                            s.async = true;
+                            s.src = 'https://widget.intercom.io/widget/' + 'gwbpci68';
+                            var x = d.getElementsByTagName('script')[0];
+                            x.parentNode.insertBefore(s, x);
+                        };
+                        if (document.readyState === 'complete') {
+                            l();
+                        } else if (w.attachEvent) {
+                            w.attachEvent('onload', l);
+                        } else {
+                            w.addEventListener('load', l, false);
+                        }
+                    }
+                })();
+            </script> -->
+
+    </body>
+
+</html>
